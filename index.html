@@ -11,12 +11,169 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+        }
 
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #94a3b8; /* slate-400 */
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #e2e8f0; /* slate-200 */
+        }
+
+        /* Sidebar active link style */
+        .sidebar-link.active {
+            background-color: #06b6d4; /* cyan-500 */
+            color: white;
+        }
+        .sidebar-link.active svg {
+            color: white;
+        }
+
+        /* Page transition (simple fade) */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+
+        /* Custom status tag colors */
+        .status-stable {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-recovering {
+            background-color: #fef9c3; /* yellow-100 */
+            color: #854d0e; /* yellow-800 */
+        }
+        .status-paid {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-pending {
+            background-color: #feefc3; /* yellow-100 */
+            color: #b45309; /* amber-700 */
+        }
+        .status-new {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1e40af; /* blue-800 */
+        }
+        .status-updated {
+            background-color: #e0e7ff; /* indigo-100 */
+            color: #3730a3; /* indigo-800 */
+        }
+        .status-modified {
+            background-color: #f3e8ff; /* purple-100 */
+            color: #581c87; /* purple-900 */
+        }
+        .status-payment {
+            background-color: #cffafe; /* cyan-100 */
+            color: #0e7490; /* cyan-700 */
+        }
+    </style>
 </head>
 <body class="antialiased text-slate-800">
 
+    <!-- 
+      ========================================================================
+      LOGIN PAGE
+      ========================================================================
+    -->
+    <div id="loginPage" class="page-container active flex items-center justify-center min-h-screen bg-slate-100">
+        <div class="w-full max-w-md p-8 space-y-8">
+            <div class="text-center">
+                <!-- Stethoscope Icon -->
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-md mb-4">
+                    <svg class="w-8 h-8 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A9.005 9.005 0 0112 15 9.005 9.005 0 018.638 5.214m-3.32 0A12.005 12.005 0 002.25 15a12.005 12.005 0 0019.5 0 12.005 12.005 0 00-3.068-9.786M15.362 5.214A9.005 9.005 0 0112 15 9.005 9.005 0 018.638 5.214" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 14.826a.75.75 0 01-.423-.205l-1.04-1.04a.75.75 0 011.06-1.06l1.04 1.04a.75.75 0 01-.637 1.265z" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-slate-900">Hospital Management</h1>
+                <p class="text-slate-500">Sign in to access the system</p>
+            </div>
+            
+            <!-- Login Form Card -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-semibold">Welcome Back</h2>
+                    <p class="text-sm text-slate-500">Enter your credentials to continue</p>
+                </div>
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                            </span>
+                            <input id="username" name="username" type="text" autocomplete="username" required class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Enter your username">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 00-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H4.5a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                            </span>
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Demo Credentials Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-sm font-semibold mb-3">Demo Credentials:</h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li class="flex justify-between"><span>Admin:</span> <span class="font-medium text-slate-800">admin / admin123</span></li>
+                    <li class="flex justify-between"><span>Doctor:</span> <span class="font-medium text-slate-800">dr.williams / doctor123</span></li>
+                    <li class="flex justify-between"><span>Staff:</span> <span class="font-medium text-slate-800">nurse.brown / staff123</span></li>
+                    <li class="flex justify-between"><span>Patient:</span> <span class="font-medium text-slate-800">john.davis / patient123</span></li>
+                </ul>
+                <p id="loginError" class="text-red-500 text-sm mt-4 text-center hidden">Invalid username or password.</p>
+            </div>
+        </div>
+    </div>
 
-
+    <!-- 
+      ========================================================================
+      ADMIN / STAFF APP CONTAINER
+      ========================================================================
+    -->
     <div id="adminAppContainer" class="page-container hidden">
         <div class="flex h-screen bg-slate-100">
             <!-- Admin Sidebar -->
@@ -1969,8 +2126,170 @@
         </div>
     </div>
     -->
-<script src="scripts.js"></script>
 
+    <script>
+        // --- Mock User Data ---
+        const MOCK_USERS = {
+            "admin": { 
+                password: "admin123", 
+                role: "admin", 
+                name: "Admin User", 
+                img: "https://placehold.co/128x128/E0E7FF/4F46E5?text=A" 
+            },
+            "dr.williams": { 
+                password: "doctor123", 
+                role: "doctor", 
+                name: "Dr. Williams", 
+                img: "https://placehold.co/128x128/D1FAE5/065F46?text=W" 
+            },
+            "nurse.brown": { 
+                password: "staff123", 
+                role: "staff", 
+                name: "Nurse Brown", 
+                img: "https://placehold.co/128x128/FEF3C7/92400E?text=B" 
+            },
+            "john.davis": { 
+                password: "patient123", 
+                role: "patient", 
+                name: "John Davis", 
+                img: "https://placehold.co/128x128/DBEAFE/1E40AF?text=J" 
+            }
+        };
+
+        // --- Login Logic ---
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+            
+            const user = MOCK_USERS[username];
+            
+            if (user && user.password === password) {
+                loginError.classList.add('hidden');
+                document.getElementById('loginPage').classList.remove('active');
+                
+                // Show the correct dashboard based on role
+                if (user.role === 'admin' || user.role === 'staff' || user.role === 'doctor') {
+                    setupAdminDashboard(user);
+                    document.getElementById('adminAppContainer').classList.add('active');
+                } else {
+                    // Handle patient login (not implemented in this scope)
+                    alert('Patient dashboard is not yet implemented.');
+                    // For demo, just log them out
+                    logout();
+                }
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        function setupAdminDashboard(user) {
+            // Update sidebar profile
+            document.getElementById('sidebarUserName').textContent = user.name;
+            document.getElementById('sidebarUserRole').textContent = user.role;
+            document.getElementById('sidebarUserImage').src = user.img;
+            
+            // TODO: Hide/show sidebar links based on role
+            // Example:
+            // if (user.role === 'staff') {
+            //     document.querySelector('a[href*="adminPanelPage"]').parentElement.style.display = 'none';
+            // }
+        }
+
+        function logout() {
+            document.getElementById('adminAppContainer').classList.remove('active');
+            // Hide other potential dashboards (patient, doctor)
+            document.getElementById('loginPage').classList.add('active');
+            
+            // Reset login form
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginError').classList.add('hidden');
+            
+            // Reset to default dashboard page
+            showAdminPage('dashboardPage', document.querySelector('.sidebar-link'));
+        }
+
+        // --- Admin Page Navigation ---
+        function showAdminPage(pageId, linkElement) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Deactivate all sidebar links
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show the target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Activate the clicked link
+            if (linkElement) {
+                linkElement.classList.add('active');
+            }
+        }
+
+        // --- Font Size Controls ---
+        let current_FontSize = 16;
+        const htmlElement = document.documentElement;
+
+        function updateFontSize() {
+            htmlElement.style.fontSize = `${currentFontSize}px`;
+        }
+        function decreaseFont() {
+            if (currentFontSize > 12) {
+                currentFontSize -= 1;
+                updateFontSize();
+            }
+        }
+        function increaseFont() {
+            if (currentFontSize < 20) {
+                currentFontSize += 1;
+                updateFontSize();
+            }
+        }
+        function resetFont() {
+            currentFontSize = 16;
+            updateFontSize();
+        }
+
+        // --- Modal Controls ---
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // --- Staff Page Search Filter ---
+        function filterStaff(searchText) {
+            const searchTerm = searchText.toLowerCase();
+            const staffCards = document.querySelectorAll('#staffGrid .staff-card');
+            
+            staffCards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                const role = card.dataset.role.toLowerCase();
+                const department = card.dataset.department.toLowerCase();
+                
+                if (name.includes(searchTerm) || role.includes(searchTerm) || department.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>
-
