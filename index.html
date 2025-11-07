@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 16px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+
+</head>
+<body class="antialiased text-slate-800">
+
+
+
+    <div id="adminAppContainer" class="page-container hidden">
+        <div class="flex h-screen bg-slate-100">
+            <!-- Admin Sidebar -->
+            <nav class="w-64 bg-slate-800 text-slate-300 flex flex-col flex-shrink-0">
+                <div class="h-16 flex items-center justify-center px-4 border-b border-slate-700">
+                    <h1 class="text-xl font-bold text-white">Hospital MS</h1>
+                </div>
+                
+                <!-- Admin User Profile -->
+                <div class="p-4 flex flex-col items-center border-b border-slate-700">
+                    <img class="w-16 h-16 rounded-full mb-2" src="https://placehold.co/128x128/E0E7FF/4F46E5?text=A" alt="Admin User">
+                    <h3 class="font-semibold text-white">Admin User</h3>
+                    <span class="text-xs bg-cyan-500 text-white px-2 py-0.5 rounded-full">admin</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex-1 overflow-y-auto pt-4">
+                    <span class="text-xs font-semibold uppercase text-slate-500 px-4">Navigation</span>
+                    <ul class="mt-2 space-y-1">
+                        <li>
+                            <a href="#" onclick="showAdminPage('dashboardPage', this)" class="sidebar-link active flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('patientsPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                <span>Patients</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('doctorsPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('staffPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.001 9.001 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span>Staff</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('adminPanelPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75M16.5 12a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0m-3.75 0H7.5m9 6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5" /></svg>
+                                <span>Admin Panel</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Logout Button -->
+                <div class="p-4 border-t border-slate-700">
+                    <a href="#" onclick="logout()" class="flex items-center px-4 py-3 rounded-md hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Top Header Bar -->
+                <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
+                    <div class="flex items-center">
+                        <button class="text-slate-500 mr-4 lg:hidden">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                        </button>
+                        <h2 class="text-lg font-semibold text-slate-700">Hospital Management System</h2>
+                    </div>
+                    <!-- Font Size Controls -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-medium text-slate-500">Font Size:</span>
+                        <button onclick="decreaseFont()" title="Decrease font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>
+                        </button>
+                        <button onclick="resetFont()" title="Reset font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        </button>
+                        <button onclick="increaseFont()" title="Increase font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Page Content (scrollable) -->
+                <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                    
+                    <!-- 
+                      ================ Admin Page: Dashboard ================
+                    -->
+                    <div id="dashboardPage" class="page active">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Dashboard</h2>
+                        <p class="text-base text-slate-500 mb-6">Hospital overview and statistics</p>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Card 1: Total Patients -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Patients</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.001 9.001 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">4</p>
+                                <p class="text-xs text-slate-500 mt-1">0 critical cases</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    12% from last month
+                                </p>
+                            </div>
+                            <!-- Card 2: Total Doctors -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Doctors</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">4</p>
+                                <p class="text-xs text-slate-500 mt-1">Active medical staff</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    5% from last month
+                                </p>
+                            </div>
+                            <!-- Card 3: Total Staff -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Staff</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">5</p>
+                                <p class="text-xs text-slate-500 mt-1">Support personnel</p>
+                                <!-- No change metric given in screenshot -->
+                            </div>
+                            <!-- Card 4: Revenue -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Revenue</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">$6.8k</p>
+                                <p class="text-xs text-slate-500 mt-1">This month</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    8% from last month
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Left Column: Recent Patients -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">Recent Patients</h3>
+                                <div class="divide-y divide-slate-100">
+                                    <!-- Patient 1 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">John Davis</p>
+                                            <p class="text-sm text-slate-500">Cardiology</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                    <!-- Patient 2 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Sarah Johnson</p>
+                                            <p class="text-sm text-slate-500">Orthopedics</p>
+                                        </div>
+                                        <span class="status-recovering text-xs font-medium px-2.5 py-0.5 rounded-full">recovering</span>
+                                    </div>
+                                    <!-- Patient 3 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Michael Chen</p>
+                                            <p class="text-sm text-slate-500">Neurology</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                    <!-- Patient 4 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Emily Rodriguez</p>
+                                            <p class="text-sm text-slate-500">Obstetrics</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Department Overview -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">Department Overview</h3>
+                                <div class="space-y-4">
+                                    <!-- Department 1 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Cardiology</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 2 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Orthopedics</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 3 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Neurology</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 4 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Obstetrics</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 50%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 5 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Emergency</span>
+                                            <span class="text-slate-500">0</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                      ================ Admin Page: Patients ================
+                    -->
+                    <div id="patientsPage" class="page">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-1">Patients</h2>
+                                <p class="text-base text-slate-500">Manage patient records and information</p>
+                            </div>
+                            <button onclick="openModal('addPatientModal')" class="flex items-center bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                <span>Add Patient</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                                </span>
+                                <input type="text" class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="Search patients by name, ID, or department...">
+                            </div>
+                        </div>
+
+                        <!-- Patients Table -->
+                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-max">
+                                    <thead class="bg-slate-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">ID</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Name</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Age</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Department</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Condition</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Admission</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">P001</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-800">John Davis</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">45</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Cardiology</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Hypertension</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1/15/2024</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <button class="text-slate-500 hover:text-cyan-600">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639l4.33-7.528A1.012 1.012 0 017.5 4.002h9a1.012 1.012 0 01.634.253l4.33 7.528c.16.279.16.634 0 .913l-4.33 7.528a1.012 1.012 0 01-.634.253h-9a1.012 1.012 0 01-.634-.253l-4.33-7.528z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">P002</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-800">Sarah Johnson</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">32</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Orthopedics</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Fracture</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-recovering text-xs font-medium px-2.5 py-0.5 rounded-full">recovering</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1/18/2024</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <button class="text-slate-500 hover:text-cyan-600">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639l4.33-7.528A1.012 1.012 0 017.5 4.002h9a1.012 1.012 0 01.634.253l4.33 7.528c.16.279.16.634 0 .913l-4.33 7.528a1.012 1.012 0 01-.634.253h-9a1.012 1.012 0 01-.634-.253l-4.33-7.528z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">P003</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-800">Michael Chen</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">58</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Neurology</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Migraine</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1/10/2024</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <button class="text-slate-500 hover:text-cyan-600">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639l4.33-7.528A1.012 1.012 0 017.5 4.002h9a1.012 1.012 0 01.634.253l4.33 7.528c.16.279.16.634 0 .913l-4.33 7.528a1.012 1.012 0 01-.634.253h-9a1.012 1.012 0 01-.634-.253l-4.33-7.528z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">P004</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-800">Emily Rodriguez</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">28</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Obstetrics</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Pregnancy - 3rd Trimester</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">1/22/2024</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                                <button class="text-slate-500 hover:text-cyan-600">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639l4.33-7.528A1.012 1.012 0 017.5 4.002h9a1.012 1.012 0 01.634.253l4.33 7.528c.16.279.16.634 0 .913l-4.33 7.528a1.012 1.012 0 01-.634.253h-9a1.012 1.012 0 01-.634-.253l-4.33-7.528z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                      ================ Admin Page: Doctors ================
+                    -->
+                    <div id="doctorsPage" class="page">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-1">Doctors</h2>
+                                <p class="text-base text-slate-500">Medical staff directory and information</p>
+                            </div>
+                            <button onclick="openModal('addDoctorModal')" class="flex items-center bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                <span>Add Doctor</span>
+                            </button>
+                        </div>
+
+                        <!-- Search Bar -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                                </span>
+                                <input type="text" class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="Search doctors by name, specialization, or department...">
+                            </div>
+                        </div>
+
+                        <!-- Doctors Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Doctor Card 1 -->
+                            <div class="bg-white rounded-lg shadow-sm divide-y divide-slate-200">
+                                <div class="p-6">
+                                    <h3 class="text-lg font-semibold text-slate-900">Dr. Robert Williams</h3>
+                                    <p class="text-sm font-medium text-cyan-600">Cardiologist</p>
+                                    <div class="mt-4 space-y-2 text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">Department:</span> Cardiology</p>
+                                        <p><span class="font-medium text-slate-800">Qualification:</span> MD, FACC</p>
+                                        <p><span class="font-medium text-slate-800">Experience:</span> 15 years</p>
+                                    </div>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.381-.956-.884-1.051l-4.116-.606a1.125 1.125 0 00-1.28.41l-1.06 1.06c-3.293-1.763-5.93-4.408-7.693-7.693l1.06-1.06a1.125 1.125 0 00.41-1.28l-.606-4.116a1.051 1.051 0 00-1.051-.884H4.5A2.25 2.25 0 002.25 6.75z" /></svg>
+                                        +1-555-1001
+                                    </p>
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.25 0l-7.5-4.625A2.25 2.25 0 013 6.993V6.75" /></svg>
+                                        r.williams@hospital.com
+                                    </p>
+                                </div>
+                                <div class="p-6 flex justify-between items-center">
+                                    <div class="text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">45</span> patients</p>
+                                        <p>Mon-Fri, 9AM-5PM</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1 text-sm font-medium text-amber-600">
+                                        <svg class="w-5 h-5 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.001 1.976-1.001 2.424 0l2.082 4.647 5.12 1.571c1.08.33 1.518 1.503 1.05 2.464l-3.79 3.584 1.487 5.031c.308 1.04-.826 1.84-1.8 1.39l-4.76-2.927-4.76 2.927c-.974.45-2.108-.35-1.8-1.39l1.487-5.031-3.79-3.584c-.468-.961-.03-2.134 1.05-2.464l5.12-1.571 2.082-4.647z" clip-rule="evenodd" /></svg>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Doctor Card 2 -->
+                            <div class="bg-white rounded-lg shadow-sm divide-y divide-slate-200">
+                                <div class="p-6">
+                                    <h3 class="text-lg font-semibold text-slate-900">Dr. Lisa Anderson</h3>
+                                    <p class="text-sm font-medium text-cyan-600">Orthopedic Surgeon</p>
+                                    <div class="mt-4 space-y-2 text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">Department:</span> Orthopedics</p>
+                                        <p><span class="font-medium text-slate-800">Qualification:</span> MD, FAAOS</p>
+                                        <p><span class="font-medium text-slate-800">Experience:</span> 12 years</p>
+                                    </div>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.381-.956-.884-1.051l-4.116-.606a1.125 1.125 0 00-1.28.41l-1.06 1.06c-3.293-1.763-5.93-4.408-7.693-7.693l1.06-1.06a1.125 1.125 0 00.41-1.28l-.606-4.116a1.051 1.051 0 00-1.051-.884H4.5A2.25 2.25 0 002.25 6.75z" /></svg>
+                                        +1-555-1002
+                                    </p>
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.25 0l-7.5-4.625A2.25 2.25 0 013 6.993V6.75" /></svg>
+                                        l.anderson@hospital.com
+                                    </p>
+                                </div>
+                                <div class="p-6 flex justify-between items-center">
+                                    <div class="text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">38</span> patients</p>
+                                        <p>Mon, Wed, Sat, 8AM-4PM</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1 text-sm font-medium text-amber-600">
+                                        <svg class="w-5 h-5 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.001 1.976-1.001 2.424 0l2.082 4.647 5.12 1.571c1.08.33 1.518 1.503 1.05 2.464l-3.79 3.584 1.487 5.031c.308 1.04-.826 1.84-1.8 1.39l-4.76-2.927-4.76 2.927c-.974.45-2.108-.35-1.8-1.39l1.487-5.031-3.79-3.584c-.468-.961-.03-2.134 1.05-2.464l5.12-1.571 2.082-4.647z" clip-rule="evenodd" /></svg>
+                                        <span>4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Doctor Card 3 -->
+                            <div class="bg-white rounded-lg shadow-sm divide-y divide-slate-200">
+                                <div class="p-6">
+                                    <h3 class="text-lg font-semibold text-slate-900">Dr. James Thompson</h3>
+                                    <p class="text-sm font-medium text-cyan-600">Neurologist</p>
+                                    <div class="mt-4 space-y-2 text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">Department:</span> Neurology</p>
+                                        <p><span class="font-medium text-slate-800">Qualification:</span> MD, PhD</p>
+                                        <p><span class="font-medium text-slate-800">Experience:</span> 20 years</p>
+                                    </div>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.381-.956-.884-1.051l-4.116-.606a1.125 1.125 0 00-1.28.41l-1.06 1.06c-3.293-1.763-5.93-4.408-7.693-7.693l1.06-1.06a1.125 1.125 0 00.41-1.28l-.606-4.116a1.051 1.051 0 00-1.051-.884H4.5A2.25 2.25 0 002.25 6.75z" /></svg>
+                                        +1-555-1003
+                                    </p>
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.25 0l-7.5-4.625A2.25 2.25 0 013 6.993V6.75" /></svg>
+                                        j.thompson@hospital.com
+                                    </p>
+                                </div>
+                                <div class="p-6 flex justify-between items-center">
+                                    <div class="text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">52</span> patients</p>
+                                        <p>Tue-Sat, 10AM-6PM</p>
+                                    </div>
+                                    <div class="flex items-center space-x-1 text-sm font-medium text-amber-600">
+                                        <svg class="w-5 h-5 text-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.001 1.976-1.001 2.424 0l2.082 4.647 5.12 1.571c1.08.33 1.518 1.503 1.05 2.464l-3.79 3.584 1.487 5.031c.308 1.04-.826 1.84-1.8 1.39l-4.76-2.927-4.76 2.927c-.974.45-2.108-.35-1.8-1.39l1.487-5.031-3.79-3.584c-.468-.961-.03-2.134 1.05-2.464l5.12-1.571 2.082-4.647z" clip-rule="evenodd" /></svg>
+                                        <span>4.7</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Doctor Card 4 -->
+                            <div class="bg-white rounded-lg shadow-sm divide-y divide-slate-200">
+                                <div class="p-6">
+                                    <h3 class="text-lg font-semibold text-slate-900">Dr. Maria Garcia</h3>
+                                    <p class="text-sm font-medium text-cyan-600">Obstetrician</p>
+                                    <div class="mt-4 space-y-2 text-sm text-slate-600">
+                                        <p><span class="font-medium text-slate-800">Department:</span> Obstetrics</p>
+                                        <p><span class="font-medium text-slate-800">Qualification:</span> MD, FACOG</p>
+                                        <p><span class="font-medium text-slate-800">Experience:</span> 10 years</p>
+                                    </div>
+                                </div>
+                                <div class="p-6 space-y-3">
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.381-.956-.884-1.051l-4.116-.606a1.125 1.125 0 00-1.28.41l-1.06 1.06c-3.293-1.763-5.93-4.408-7.693-7.693l1.06-1.06a1.125 1.125 0 00.41-1.28l-.606-4.116a1.051 1.051 0 00-1.051-.884H4.5A2.25 2.25 0 002.25 6.75z" /></svg>
+                                        +1-555-1004
+                                    </p>
+                                    <p class="text-sm text-slate-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.25 0l-7.5-4.625A2.25 2.25 0 013 6.993V6.75" /></svg>
+                                        m.garcia@hospital.com
+                                    </p>
+                                </div>
+                                <!-- No rating or schedule on this card in the screenshot -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                      ================ Admin Page: Staff (Placeholder) ================
+                    -->
+                    <div id="staffPage" class="page">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Staff</h2>
+                        <p class="text-base text-slate-500 mb-6">Manage staff records and information</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <p>Staff management interface will be here. No screenshot was provided for this page.</p>
+                        </div>
+                    </div>
+
+                    <!-- 
+                      ================ Admin Page: Admin Panel ================
+                    -->
+                    <div id="adminPanelPage" class="page">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-1">Admin Panel</h2>
+                                <p class="text-base text-slate-500">Manage system users and settings</p>
+                            </div>
+                            <button onclick="openModal('addUserModal')" class="flex items-center bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                <span>Add New User</span>
+                            </button>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Card 1: Total Users -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Users</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">13</p>
+                                <p class="text-xs text-slate-500 mt-1">Across all roles</p>
+                            </div>
+                            <!-- Card 2: Patients -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Patients</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">4</p>
+                                <p class="text-xs text-slate-500 mt-1">Active records</p>
+                            </div>
+                            <!-- Card 3: Medical Staff -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Medical Staff</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-3h6M4.828 4.828a1.5 1.5 0 012.122 0l3.089 3.09a1.5 1.5 0 010 2.12l-3.09 3.09a1.5 1.5 0 01-2.122 0l-3.09-3.09a1.5 1.5 0 010-2.12l3.09-3.09z" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">9</p>
+                                <p class="text-xs text-slate-500 mt-1">Doctors & support staff</p>
+                            </div>
+                            <!-- Card 4: Total Revenue -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Revenue</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-3h6" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">$6.8k</p>
+                                <p class="text-xs text-slate-500 mt-1">From all bills</p>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Left Column: Recent Activity -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">Recent Activity</h3>
+                                <p class="text-sm text-slate-500 mb-4">Latest system changes and updates</p>
+                                <div class="divide-y divide-slate-100">
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">New patient registered</p>
+                                            <p class="text-sm text-slate-500">John Davis - Cardiology</p>
+                                        </div>
+                                        <span class="status-new text-xs font-medium px-2.5 py-0.5 rounded-full">New</span>
+                                    </div>
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Doctor profile updated</p>
+                                            <p class="text-sm text-slate-500">Dr. Robert Williams</p>
+                                        </div>
+                                        <span class="status-updated text-xs font-medium px-2.5 py-0.5 rounded-full">Updated</span>
+                                    </div>
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Staff shift changed</p>
+                                            <p class="text-sm text-slate-500">Jennifer Brown</p>
+                                        </div>
+                                        <span class="status-modified text-xs font-medium px-2.5 py-0.5 rounded-full">Modified</span>
+                                    </div>
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Bill payment received</p>
+                                            <p class="text-sm text-slate-500">$1,500 - Patient P001</p>
+                                        </div>
+                                        <span class="status-payment text-xs font-medium px-2.5 py-0.5 rounded-full">Payment</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: System Access -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">System Access</h3>
+                                <p class="text-sm text-slate-500 mb-4">User roles and permissions</p>
+                                <div class="space-y-4">
+                                    <!-- Role 1 -->
+                                    <div class="flex items-center p-4 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.333 9-6.03 9-11.623 0-1.427-.298-2.8-1.025-4.016A11.959 11.959 0 0112 2.764z" /></svg>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <p class="font-medium text-slate-800">Administrators</p>
+                                            <p class="text-sm text-slate-500">Full system access</p>
+                                        </div>
+                                        <span class="text-sm font-bold text-white bg-blue-600 w-6 h-6 flex items-center justify-center rounded-full">1</span>
+                                    </div>
+                                    <!-- Role 2 -->
+                                    <div class="flex items-center p-4 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <p class="font-medium text-slate-800">Doctors</p>
+                                            <p class="text-sm text-slate-500">Patient data access</p>
+                                        </div>
+                                        <span class="text-sm font-bold text-white bg-green-600 w-6 h-6 flex items-center justify-center rounded-full">4</span>
+                                    </div>
+                                    <!-- Role 3 -->
+                                    <div class="flex items-center p-4 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <p class="font-medium text-slate-800">Staff</p>
+                                            <p class="text-sm text-slate-500">Limited access</p>
+                                        </div>
+                                        <span class="text-sm font-bold text-white bg-yellow-600 w-6 h-6 flex items-center justify-center rounded-full">5</span>
+                                    </div>
+                                    <!-- Role 4 -->
+                                    <div class="flex items-center p-4 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                        </div>
+                                        <div class="ml-4 flex-1">
+                                            <p class="font-medium text-slate-800">Patients</p>
+                                            <p class="text-sm text-slate-500">Portal access only</p>
+                                        </div>
+                                        <span class="text-sm font-bold text-white bg-purple-600 w-6 h-6 flex items-center justify-center rounded-full">4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 
+      ========================================================================
+      PATIENT APP CONTAINER
+      ========================================================================
+    -->
+    <div id="patientAppContainer" class="page-container hidden">
+        <div class="flex h-screen bg-slate-100">
+            <!-- Patient Sidebar -->
+            <nav class="w-64 bg-slate-800 text-slate-300 flex flex-col flex-shrink-0">
+                <div class="h-16 flex items-center justify-center px-4 border-b border-slate-700">
+                    <h1 class="text-xl font-bold text-white">Hospital MS</h1>
+                </div>
+                
+                <!-- Patient User Profile -->
+                <div class="p-4 flex flex-col items-center border-b border-slate-700">
+                    <img class="w-16 h-16 rounded-full mb-2" src="https://placehold.co/128x128/E0E7FF/4F46E5?text=JD" alt="Patient User">
+                    <h3 class="font-semibold text-white">John Davis</h3>
+                    <span class="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">patient</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex-1 overflow-y-auto pt-4">
+                    <span class="text-xs font-semibold uppercase text-slate-500 px-4">Navigation</span>
+                    <ul class="mt-2 space-y-1">
+                        <li>
+                            <a href="#" onclick="showPatientPage('patientPortalPage', this)" class="sidebar-link active flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                <span>My Portal</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Logout Button -->
+                <div class="p-4 border-t border-slate-700">
+                    <a href="#" onclick="logout()" class="flex items-center px-4 py-3 rounded-md hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Top Header Bar -->
+                <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
+                    <h2 class="text-lg font-semibold text-slate-700">Hospital Management System</h2>
+                    <!-- Font Size Controls -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-medium text-slate-500">Font Size:</span>
+                        <button onclick="decreaseFont()" title="Decrease font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>
+                        </button>
+                        <button onclick="resetFont()" title="Reset font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        </button>
+                        <button onclick="increaseFont()" title="Increase font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg>
+                        </button>
+                    </div>
+                </header>
+                
+                <!-- Page Content (scrollable) -->
+                <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                    <!-- 
+                      ================ Patient Page: My Portal ================
+                    -->
+                    <div id="patientPortalPage" class="page active">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Welcome, John Davis</h2>
+                        <p class="text-base text-slate-500 mb-6">Your personal health information</p>
+                        
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                            <!-- Health Status -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex items-center text-xl font-semibold text-slate-900 mb-4">
+                                    <svg class="w-6 h-6 mr-2 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                                    Health Status
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Current Status</p>
+                                        <span class="status-stable text-sm font-medium px-3 py-1 rounded-full">stable</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Department</p>
+                                        <p class="text-base font-medium text-slate-800">Cardiology</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Condition</p>
+                                        <p class="text-base font-medium text-slate-800">Hypertension</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Admitted</p>
+                                        <p class="text-base font-medium text-slate-800">1/15/2024</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Basic Information -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex items-center text-xl font-semibold text-slate-900 mb-4">
+                                    <svg class="w-6 h-6 mr-2 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                                    Basic Information
+                                </div>
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Age</p>
+                                        <p class="text-base font-medium text-slate-800">45 years</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Blood Type</p>
+                                        <p class="text-base font-medium text-slate-800">O+</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-500 mb-1">Current Medications</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="text-xs font-medium bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full">Lisinopril</span>
+                                            <span class="text-xs font-medium bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full">Aspirin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- My Bills -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center text-xl font-semibold text-slate-900 mb-4">
+                                <svg class="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                                My Bills
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-max">
+                                    <thead class="border-b border-slate-200">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Description</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Amount</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        <tr>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-500">1/15/2024</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-800">Consultation & Tests</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-800">$1,500</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-paid text-xs font-medium px-2.5 py-0.5 rounded-full">paid</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-500">1/20/2024</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-800">Medication</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-slate-800">$800</td>
+                                            <td class="px-4 py-4 whitespace-nowrap text-sm">
+                                                <span class="status-pending text-xs font-medium px-2.5 py-0.5 rounded-full">pending</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="border-t border-slate-200">
+                                            <td colspan="2" class="px-4 py-3 text-right text-sm font-medium text-slate-500">Total Amount</td>
+                                            <td colspan="2" class="px-4 py-3 text-left text-base font-bold text-slate-900">$2,300</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Note -->
+                        <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <p class="text-sm text-yellow-800">
+                                <span class="font-medium">Note:</span> For detailed medical records and test results, please consult with your healthcare provider. This portal shows basic health information only.
+                            </p>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 
+      ========================================================================
+      MODALS
+      ========================================================================
+    -->
+
+    <!-- Add Patient Modal -->
+    <div id="addPatientModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50 transition-opacity">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 m-4" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center pb-3 border-b">
+                <h3 class="text-xl font-semibold text-slate-900">Add New Patient</h3>
+                <button onclick="closeModal('addPatientModal')" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <form class="mt-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                        <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. Jane Doe">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Age</label>
+                        <input type="number" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. 34">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
+                    <select class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
+                        <option>Select department...</option>
+                        <option>Cardiology</option>
+                        <option>Orthopedics</option>
+                        <option>Neurology</option>
+                        <option>Obstetrics</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Condition</label>
+                    <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. Hypertension">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Admission Date</label>
+                    <input type="date" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
+                </div>
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('addPatientModal')" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                        Save Patient
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Doctor Modal -->
+    <div id="addDoctorModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50 transition-opacity">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 m-4" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center pb-3 border-b">
+                <h3 class="text-xl font-semibold text-slate-900">Add New Doctor</h3>
+                <button onclick="closeModal('addDoctorModal')" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <form class="mt-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. Dr. Adam Smith">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Specialization</label>
+                        <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. Pediatrician">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
+                        <select class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
+                            <option>Select department...</option>
+                            <option>Cardiology</option>
+                            <option>Orthopedics</option>
+                            <option>Neurology</option>
+                            <option>Obstetrics</option>
+                            <option>Pediatrics</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Qualification</label>
+                    <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. MD, PhD">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                        <input type="email" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. a.smith@hospital.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                        <input type="tel" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. +1-555-1005">
+                    </div>
+                </div>
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('addDoctorModal')" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                        Save Doctor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50 transition-opacity">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 m-4" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center pb-3 border-b">
+                <h3 class="text-xl font-semibold text-slate-900">Add New User</h3>
+                <button onclick="closeModal('addUserModal')" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <form class="mt-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                    <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. Jennifer Brown">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                    <input type="text" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="e.g. nurse.brown">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                    <select class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
+                        <option>Select role...</option>
+                        <option value="admin">Administrator</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="staff">Staff</option>
+                        <option value="patient">Patient</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Set Password</label>
+                    <input type="password" class="w-full py-2 px-3 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500" placeholder="Create a temporary password">
+                </div>
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('addUserModal')" class="bg-slate-100 text-slate-700 px-4 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                        Create User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 
+      ========================================================================
+      JAVASCRIPT
+      ========================================================================
+    -->
+    <script>
+        const demoUsers = {
+            "admin": "admin123",
+            "dr.williams": "doctor123",
+            "nurse.brown": "staff123",
+            "john.davis": "patient123"
+        };
+        
+        let currentAdminPage = 'dashboardPage';
+        let currentPatientPage = 'patientPortalPage';
+        let currentFontSize = 16; // Default font size in px
+
+        // --- Page Navigation ---
+
+        function showPageContainer(containerId) {
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+                page.classList.add('hidden');
+            });
+            const targetPage = document.getElementById(containerId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                targetPage.classList.remove('hidden');
+            }
+        }
+
+        function showAdminPage(pageId, linkElement) {
+            // Hide all admin pages
+            document.querySelectorAll('#adminAppContainer .page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show the target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            currentAdminPage = pageId;
+
+            // Update sidebar active link
+            if (linkElement) {
+                document.querySelectorAll('#adminAppContainer .sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                linkElement.classList.add('active');
+            }
+        }
+
+        function showPatientPage(pageId, linkElement) {
+            // Hide all patient pages
+            document.querySelectorAll('#patientAppContainer .page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show the target page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            currentPatientPage = pageId;
+
+            // Update sidebar active link
+            if (linkElement) {
+                document.querySelectorAll('#patientAppContainer .sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                linkElement.classList.add('active');
+            }
+        }
+
+        // --- Authentication ---
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+
+            if (demoUsers[username] && demoUsers[username] === password) {
+                loginError.classList.add('hidden');
+                
+                // Route to the correct dashboard
+                if (username === 'admin' || username === 'dr.williams' || username === 'nurse.brown') {
+                    showPageContainer('adminAppContainer');
+                    // Reset to default page
+                    showAdminPage('dashboardPage', document.querySelector('#adminAppContainer .sidebar-link'));
+                } else if (username === 'john.davis') {
+                    showPageContainer('patientAppContainer');
+                    // Reset to default page
+                    showPatientPage('patientPortalPage', document.querySelector('#patientAppContainer .sidebar-link'));
+                }
+                
+                // Clear form
+                document.getElementById('loginForm').reset();
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        function logout() {
+            showPageContainer('loginPage');
+        }
+
+        // --- Modals ---
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        // Add event listener to close modals when clicking on the backdrop
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', () => closeModal(modal.id));
+        });
+
+        // --- Font Size Controls ---
+
+        function updateFontSize() {
+            document.documentElement.style.fontSize = currentFontSize + 'px';
+        }
+        
+        function increaseFont() {
+            if (currentFontSize < 20) { // Max 20px
+                currentFontSize += 1;
+                updateFontSize();
+            }
+        }
+
+        function decreaseFont() {
+            if (currentFontSize > 12) { // Min 12px
+                currentFontSize -= 1;
+                updateFontSize();
+            }
+        }
+        
+        function resetFont() {
+            currentFontSize = 16; // Default
+            updateFontSize();
+        }
+
+        // Initialize the first page
+        showPageContainer('loginPage');
+
+    </script>
+
+</body>
+</html>
+
+<!-- combine the below code and break it into many files carefully and later i will connect it to mysql database so table names and all should be made carefully-->
+
+
+<!DOCTYPE html>
+<html lang="en" style="font-size: 16px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #94a3b8; /* slate-400 */
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #e2e8f0; /* slate-200 */
+        }
+
+        /* Sidebar active link style */
+        .sidebar-link.active {
+            background-color: #06b6d4; /* cyan-500 */
+            color: white;
+        }
+        .sidebar-link.active svg {
+            color: white;
+        }
+
+        /* Page transition (simple fade) */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+
+        /* Custom status tag colors */
+        .status-stable {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-recovering {
+            background-color: #fef9c3; /* yellow-100 */
+            color: #854d0e; /* yellow-800 */
+        }
+        .status-paid {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-pending {
+            background-color: #feefc3; /* yellow-100 */
+            color: #b45309; /* amber-700 */
+        }
+        .status-new {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1e40af; /* blue-800 */
+        }
+        .status-updated {
+            background-color: #e0e7ff; /* indigo-100 */
+            color: #3730a3; /* indigo-800 */
+        }
+        .status-modified {
+            background-color: #f3e8ff; /* purple-100 */
+            color: #581c87; /* purple-900 */
+        }
+        .status-payment {
+            background-color: #cffafe; /* cyan-100 */
+            color: #0e7490; /* cyan-700 */
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <!-- 
+        ========================================================================
+        LOGIN PAGE
+        ========================================================================
+    -->
+    <div id="loginPage" class="page-container active flex items-center justify-center min-h-screen bg-slate-100">
+        <div class="w-full max-w-md p-8 space-y-8">
+            <div class="text-center">
+                <!-- Stethoscope Icon -->
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-md mb-4">
+                    <svg class="w-8 h-8 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A9.005 9.005 0 0112 15 9.005 9.005 0 018.638 5.214m-3.32 0A12.005 12.005 0 002.25 15a12.005 12.005 0 0019.5 0 12.005 12.005 0 00-3.068-9.786M15.362 5.214A9.005 9.005 0 0112 15 9.005 9.005 0 018.638 5.214" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 14.826a.75.75 0 01-.423-.205l-1.04-1.04a.75.75 0 011.06-1.06l1.04 1.04a.75.75 0 01-.637 1.265z" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-slate-900">Hospital Management</h1>
+                <p class="text-slate-500">Sign in to access the system</p>
+            </div>
+            
+            <!-- Login Form Card -->
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-semibold">Welcome Back</h2>
+                    <p class="text-sm text-slate-500">Enter your credentials to continue</p>
+                </div>
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-slate-700 mb-1">Username</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                            </span>
+                            <input id="username" name="username" type="text" autocomplete="username" required class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Enter your username">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 00-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H4.5a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                            </span>
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="w-full pl-10 pr-10 py-2.5 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="Enter your password">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Demo Credentials Card -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-sm font-semibold mb-3">Demo Credentials:</h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li class="flex justify-between"><span>Admin:</span> <span class="font-medium text-slate-800">admin / admin123</span></li>
+                    <li class="flex justify-between"><span>Doctor:</span> <span class="font-medium text-slate-800">dr.williams / doctor123</span></li>
+                    <li class="flex justify-between"><span>Staff:</span> <span class="font-medium text-slate-800">nurse.brown / staff123</span></li>
+                    <li class="flex justify-between"><span>Patient:</span> <span class="font-medium text-slate-800">john.davis / patient123</span></li>
+                </ul>
+                <p id="loginError" class="text-red-500 text-sm mt-4 text-center hidden">Invalid username or password.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        ========================================================================
+        ADMIN / STAFF APP CONTAINER
+        ========================================================================
+    -->
+    <div id="adminAppContainer" class="page-container hidden">
+        <div class="flex h-screen bg-slate-100">
+            <!-- Admin Sidebar -->
+            <nav class="w-64 bg-slate-800 text-slate-300 flex flex-col flex-shrink-0">
+                <div class="h-16 flex items-center justify-center px-4 border-b border-slate-700">
+                    <h1 class="text-xl font-bold text-white">Hospital MS</h1>
+                </div>
+                
+                <!-- Admin User Profile -->
+                <div class="p-4 flex flex-col items-center border-b border-slate-700">
+                    <img class="w-16 h-16 rounded-full mb-2" src="https://placehold.co/128x128/E0E7FF/4F46E5?text=A" alt="Admin User" id="sidebarUserImage">
+                    <h3 class="font-semibold text-white" id="sidebarUserName">Admin User</h3>
+                    <span class="text-xs bg-cyan-500 text-white px-2 py-0.5 rounded-full" id="sidebarUserRole">admin</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex-1 overflow-y-auto pt-4">
+                    <span class="text-xs font-semibold uppercase text-slate-500 px-4">Navigation</span>
+                    <ul class="mt-2 space-y-1" id="adminSidebarLinks">
+                        <li>
+                            <a href="#" onclick="showAdminPage('dashboardPage', this)" class="sidebar-link active flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('patientsPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                <span>Patients</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('doctorsPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span>Doctors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('staffPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.001 9.001 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span>Staff</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="showAdminPage('adminPanelPage', this)" class="sidebar-link flex items-center px-4 py-3 hover:bg-slate-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75M16.5 12a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0m-3.75 0H7.5m9 6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5" /></svg>
+                                <span>Admin Panel</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Logout Button -->
+                <div class="p-4 border-t border-slate-700">
+                    <a href="#" onclick="logout()" class="flex items-center px-4 py-3 rounded-md hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Top Header Bar -->
+                <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
+                    <div class="flex items-center">
+                        <button class="text-slate-500 mr-4 lg:hidden">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                        </button>
+                        <h2 class="text-lg font-semibold text-slate-700">Hospital Management System</h2>
+                    </div>
+                    <!-- Font Size Controls -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-medium text-slate-500">Font Size:</span>
+                        <button onclick="decreaseFont()" title="Decrease font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" /></svg>
+                        </button>
+                        <button onclick="resetFont()" title="Reset font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        </button>
+                        <button onclick="increaseFont()" title="Increase font size" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Page Content (scrollable) -->
+                <main class="flex-1 overflow-y-auto p-6 md:p-8">
+                    
+                    <!-- 
+                        ================ Admin Page: Dashboard ================
+                    -->
+                    <div id="dashboardPage" class="page active">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Dashboard</h2>
+                        <p class="text-base text-slate-500 mb-6">Hospital overview and statistics</p>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Card 1: Total Patients -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Patients</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.001 9.001 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">4</p>
+                                <p class="text-xs text-slate-500 mt-1">0 critical cases</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    12% from last month
+                                </p>
+                            </div>
+                            <!-- Card 2: Total Doctors -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Doctors</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">4</p>
+                                <p class="text-xs text-slate-500 mt-1">Active medical staff</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    5% from last month
+                                </p>
+                            </div>
+                            <!-- Card 3: Total Staff -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Total Staff</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.53-.292v.303a6.375 6.375 0 01-5.33-3.291l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665a6.375 6.375 0 015.33-3.291v.303a4.125 4.125 0 007.53.292 9.337 9.337 0 00-4.121-.952 9.38 9.38 0 00-2.625.372M6.375 12.375l-1.33.665a6.375 6.375 0 01-1.5-3.291V8.625a6.375 6.375 0 011.5-3.291l1.33.665" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">5</p>
+                                <p class="text-xs text-slate-500 mt-1">Support personnel</p>
+                                <!-- No change metric given in screenshot -->
+                            </div>
+                            <!-- Card 4: Revenue -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-sm font-medium text-slate-500">Revenue</h3>
+                                    <svg class="w-5 h-5 text-cyan-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+                                </div>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">$6.8k</p>
+                                <p class="text-xs text-slate-500 mt-1">This month</p>
+                                <p class="text-xs text-green-600 mt-2 flex items-center">
+                                    <svg class="w-3 h-3 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" /></svg>
+                                    8% from last month
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Left Column: Recent Patients -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">Recent Patients</h3>
+                                <div class="divide-y divide-slate-100">
+                                    <!-- Patient 1 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">John Davis</p>
+                                            <p class="text-sm text-slate-500">Cardiology</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                    <!-- Patient 2 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Sarah Johnson</p>
+                                            <p class="text-sm text-slate-500">Orthopedics</p>
+                                        </div>
+                                        <span class="status-recovering text-xs font-medium px-2.5 py-0.5 rounded-full">recovering</span>
+                                    </div>
+                                    <!-- Patient 3 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Michael Chen</p>
+                                            <p class="text-sm text-slate-500">Neurology</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                    <!-- Patient 4 -->
+                                    <div class="py-4 flex items-center justify-between">
+                                        <div>
+                                            <p class="font-medium text-slate-800">Emily Rodriguez</p>
+                                            <p class="text-sm text-slate-500">Obstetrics</p>
+                                        </div>
+                                        <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Department Overview -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 class="text-lg font-semibold text-slate-900 mb-4">Department Overview</h3>
+                                <div class="space-y-4">
+                                    <!-- Department 1 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Cardiology</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 2 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Orthopedics</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 70%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 3 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Neurology</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 4 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Obstetrics</span>
+                                            <span class="text-slate-500">1</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 50%"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Department 5 -->
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="font-medium text-slate-700">Emergency</span>
+                                            <span class="text-slate-500">0</span>
+                                        </div>
+                                        <div class="w-full bg-slate-200 rounded-full h-1.5">
+                                            <div class="bg-cyan-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                        ================ Admin Page: Patients ================
+                    -->
+                    <div id="patientsPage" class="page">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-1">Patients</h2>
+                                <p class="text-base text-slate-500">Manage patient records and information</p>
+                            </div>
+                            <button onclick="openModal('addPatientModal')" class="flex items-center bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                <span>Add Patient</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <!-- This is the closing span tag you were missing -->
+                                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                    </svg>
+                                </span>
+                                <input type="text" placeholder="Search patients by name, ID, or department..." class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Patients Table (Placeholder) -->
+                        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <table class="w-full divide-y divide-slate-200">
+                                <thead class="bg-slate-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Name</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Patient ID</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Department</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">John Davis</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">P-001</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Cardiology</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="status-stable text-xs font-medium px-2.5 py-0.5 rounded-full">stable</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-cyan-600 hover:text-cyan-800">View</a>
+                                        </td>
+                                    </tr>
+                                    <!-- More rows... -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 
+                        ========================================================================
+                        Admin Page: Staff (NEWLY ADDED SECTION)
+                        ========================================================================
+                    -->
+                    <div id="staffPage" class="page">
+                        <!-- Header -->
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-900 mb-1">Staff</h2>
+                                <p class="text-base text-slate-500">Hospital staff directory and administration</p>
+                            </div>
+                            <button onclick="openModal('addStaffModal')" class="flex items-center bg-cyan-500 text-white px-4 py-2.5 rounded-lg shadow-sm hover:bg-cyan-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                <span>Add Staff Member</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-4">
+                                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                    </svg>
+                                </span>
+                                <input type="text" placeholder="Search staff by name, role, or department..." class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" onkeyup="filterStaff(this.value)">
+                            </div>
+                        </div>
+
+                        <!-- Staff Grid -->
+                        <div id="staffGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Staff Card 1: Jennifer Brown -->
+                            <div class="staff-card bg-white p-6 rounded-lg shadow-sm border border-slate-200" data-name="Jennifer Brown" data-role="Head Nurse" data-department="Emergency">
+                                <!-- Card Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">Jennifer Brown</h3>
+                                        <p class="text-sm font-medium text-cyan-600">Head Nurse</p>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">EMP001</span>
+                                </div>
+
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 text-sm">
+                                    <div>
+                                        <span class="text-slate-500 block">Department</span>
+                                        <span class="font-medium text-slate-800">Emergency</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-500 block">Shift</span>
+                                        <span class="font-medium text-slate-800">Day Shift (7AM-3PM)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="space-y-2 text-sm border-t border-slate-100 pt-4 mb-4">
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97.97c-2.693-1.46-4.98-3.756-6.44-6.44l.97-.97c.363-.363.526-.833.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                                        <span>+1-555-2001</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                        <span>j.brown@hospital.com</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div class="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                                        <span>Joined 3/15/2020</span>
+                                    </div>
+                                    <span class="font-medium text-green-600">$ 65k/yr</span>
+                                </div>
+                            </div>
+
+                            <!-- Staff Card 2: David Miller -->
+                            <div class="staff-card bg-white p-6 rounded-lg shadow-sm border border-slate-200" data-name="David Miller" data-role="Lab Technician" data-department="Laboratory">
+                                <!-- Card Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">David Miller</h3>
+                                        <p class="text-sm font-medium text-cyan-600">Lab Technician</p>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">EMP002</span>
+                                </div>
+
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 text-sm">
+                                    <div>
+                                        <span class="text-slate-500 block">Department</span>
+                                        <span class="font-medium text-slate-800">Laboratory</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-500 block">Shift</span>
+                                        <span class="font-medium text-slate-800">Morning Shift (6AM-2PM)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="space-y-2 text-sm border-t border-slate-100 pt-4 mb-4">
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97.97c-2.693-1.46-4.98-3.756-6.44-6.44l.97-.97c.363-.363.526-.833.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                                        <span>+1-555-2002</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                        <span>d.miller@hospital.com</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div class="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                                        <span>Joined 6/1/2021</span>
+                                    </div>
+                                    <span class="font-medium text-green-600">$ 48k/yr</span>
+                                </div>
+                            </div>
+
+                            <!-- Staff Card 3: Amanda Wilson -->
+                            <div class="staff-card bg-white p-6 rounded-lg shadow-sm border border-slate-200" data-name="Amanda Wilson" data-role="Pharmacist" data-department="Pharmacy">
+                                <!-- Card Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">Amanda Wilson</h3>
+                                        <p class="text-sm font-medium text-cyan-600">Pharmacist</p>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">EMP003</span>
+                                </div>
+
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 text-sm">
+                                    <div>
+                                        <span class="text-slate-500 block">Department</span>
+                                        <span class="font-medium text-slate-800">Pharmacy</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-500 block">Shift</span>
+                                        <span class="font-medium text-slate-800">Day Shift (8AM-4PM)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="space-y-2 text-sm border-t border-slate-100 pt-4 mb-4">
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97.97c-2.693-1.46-4.98-3.756-6.44-6.44l.97-.97c.363-.363.526-.833.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                                        <span>+1-555-2003</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                        <span>a.wilson@hospital.com</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div class="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                                        <span>Joined 9/10/2019</span>
+                                    </div>
+                                    <span class="font-medium text-green-600">$ 72k/yr</span>
+                                </div>
+                            </div>
+
+                            <!-- Staff Card 4: Kevin Martinez -->
+                            <div class="staff-card bg-white p-6 rounded-lg shadow-sm border border-slate-200" data-name="Kevin Martinez" data-role="Receptionist" data-department="Administration">
+                                <!-- Card Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">Kevin Martinez</h3>
+                                        <p class="text-sm font-medium text-cyan-600">Receptionist</p>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">EMP004</span>
+                                </div>
+
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 text-sm">
+                                    <div>
+                                        <span class="text-slate-500 block">Department</span>
+                                        <span class="font-medium text-slate-800">Administration</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-500 block">Shift</span>
+                                        <span class="font-medium text-slate-800">Day Shift (8AM-5PM)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="space-y-2 text-sm border-t border-slate-100 pt-4 mb-4">
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97.97c-2.693-1.46-4.98-3.756-6.44-6.44l.97-.97c.363-.363.526-.833.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                                        <span>+1-555-2004</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                        <span>k.martinez@hospital.com</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div class="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                                        <span>Joined 1/20/2022</span>
+                                    </div>
+                                    <span class="font-medium text-green-600">$ 38k/yr</span>
+                                </div>
+                            </div>
+
+                            <!-- Staff Card 5: Rachel Taylor -->
+                            <div class="staff-card bg-white p-6 rounded-lg shadow-sm border border-slate-200" data-name="Rachel Taylor" data-role="Physical Therapist" data-department="Rehabilitation">
+                                <!-- Card Header -->
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-slate-900">Rachel Taylor</h3>
+                                        <p class="text-sm font-medium text-cyan-600">Physical Therapist</p>
+                                    </div>
+                                    <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2 py-1 rounded">EMP005</span>
+                                </div>
+
+                                <!-- Details Grid -->
+                                <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-4 text-sm">
+                                    <div>
+                                        <span class="text-slate-500 block">Department</span>
+                                        <span class="font-medium text-slate-800">Rehabilitation</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-500 block">Shift</span>
+                                        <span class="font-medium text-slate-800">Afternoon Shift (12PM-8PM)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="space-y-2 text-sm border-t border-slate-100 pt-4 mb-4">
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97.97c-2.693-1.46-4.98-3.756-6.44-6.44l.97-.97c.363-.363.526-.833.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                                        <span>+1-555-2005</span>
+                                    </div>
+                                    <div class="flex items-center text-slate-600">
+                                        <svg class="w-4 h-4 mr-2.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                        <span>r.taylor@hospital.com</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Footer -->
+                                <div class="flex justify-between items-center text-sm text-slate-500 border-t border-slate-100 pt-4">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+                                        <span>Joined 11/5/2020</span>
+                                    </div>
+                                    <span class="font-medium text-green-600">$ 58k/yr</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 
+                        ================ Admin Page: Doctors (Placeholder) ================
+                    -->
+                    <div id="doctorsPage" class="page">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Doctors</h2>
+                        <p class="text-base text-slate-500 mb-6">Manage doctor profiles and schedules</p>
+                        <!-- Content for doctors page goes here -->
+                    </div>
+
+                    <!-- 
+                        ================ Admin Page: Admin Panel (Placeholder) ================
+                    -->
+                    <div id="adminPanelPage" class="page">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-1">Admin Panel</h2>
+                        <p class="text-base text-slate-500 mb-6">System settings and user management</p>
+                        <!-- Content for admin panel page goes here -->
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals (Add Patient, Add Staff, etc.) would go here -->
+    <!-- Example: 
+    <div id="addPatientModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
+            <h3 class="text-lg font-medium mb-4">Add New Patient</h3>
+            ...
+            <button onclick="closeModal('addPatientModal')" class="text-slate-500">Cancel</button>
+        </div>
+    </div>
+    -->
+<script src="scripts.js"></script>
+
+</body>
+</html>
+
