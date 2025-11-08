@@ -1,0 +1,83 @@
+
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #94a3b8; /* slate-400 */
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #e2e8f0; /* slate-200 */
+        }
+
+        /* Sidebar active link style */
+        .sidebar-link.active {
+            background-color: #06b6d4; /* cyan-500 */
+            color: white;
+        }
+        .sidebar-link.active svg {
+            color: white;
+        }
+
+        /* Page transition (simple fade) */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+
+        /* Custom status tag colors */
+        .status-stable {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-recovering {
+            background-color: #fef9c3; /* yellow-100 */
+            color: #854d0e; /* yellow-800 */
+        }
+        .status-paid {
+            background-color: #dcfce7; /* green-100 */
+            color: #166534; /* green-800 */
+        }
+        .status-pending {
+            background-color: #feefc3; /* yellow-100 */
+            color: #b45309; /* amber-700 */
+        }
+        .status-new {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1e40af; /* blue-800 */
+        }
+        .status-updated {
+            background-color: #e0e7ff; /* indigo-100 */
+            color: #3730a3; /* indigo-800 */
+        }
+        .status-modified {
+            background-color: #f3e8ff; /* purple-100 */
+            color: #581c87; /* purple-900 */
+        }
+        .status-payment {
+            background-color: #cffafe; /* cyan-100 */
+            color: #0e7490; /* cyan-700 */
+        }
